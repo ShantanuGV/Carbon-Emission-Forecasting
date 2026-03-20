@@ -1,0 +1,9 @@
+{
+    "world8024.csv": "F-gases emissions from Industrial Processes (Mt CO2e)",
+    "worldeco.csv": "Industry (including construction), value added (annual % growth)",
+    "worldenergy.csv": "Energy use (kg of oil equivalent per capita)",
+    "worldforest.csv": "Forest area (% of land area)",
+    "worldfos.csv": "Fossil fuel energy consumption (% of total)",
+    "worldpop.csv": "Population, total",
+    "worldrenew.csv": "Renewable energy consumption (% of total final energy consumption)"
+}
