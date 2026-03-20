@@ -134,7 +134,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-@st.cache_data
+@st.cache_resource
 def load_multifactor_data(data_path):
     """Load multi-factor emission data"""
     engineer = FeatureEngineer()
