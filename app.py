@@ -14,6 +14,7 @@ import importlib
 
 # Add project root to path for core module imports
 sys.path.append(str(Path(__file__).parent))
+<<<<<<< HEAD
 
 import core
 importlib.reload(core)
@@ -24,6 +25,8 @@ import core.feature_engineering
 importlib.reload(core.scenario_engine)
 importlib.reload(core.model_training)
 importlib.reload(core.feature_engineering)
+=======
+>>>>>>> 218745c (Deployment fix: added Procfile and fixed root paths)
 
 from core import (
     FeatureEngineer,
@@ -343,8 +346,13 @@ def main():
         emissions and simulate realistic decarbonization pathways toward **sustainable targets**.
     \"\"\")
     
+<<<<<<< HEAD
     # Data path (Relative to root)
     data_path = Path(__file__).parent / \"data\" / \"real_emission_dataset.csv\"
+=======
+    # Data path (corrected for root relocation)
+    data_path = Path(__file__).parent / "data" / "emission.csv"
+>>>>>>> 218745c (Deployment fix: added Procfile and fixed root paths)
     
     try:
         # Load data

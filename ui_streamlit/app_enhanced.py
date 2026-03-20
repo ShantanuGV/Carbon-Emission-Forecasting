@@ -134,7 +134,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-#@st.cache_data
+@st.cache_data
 def load_multifactor_data(data_path):
     """Load multi-factor emission data"""
     engineer = FeatureEngineer()
@@ -142,7 +142,7 @@ def load_multifactor_data(data_path):
     return df, engineer
 
 
-##@st.cache_resource
+@st.cache_resource
 def train_enhanced_model(_engineer, df):
     """Train multi-factor emission model"""
     # Prepare features
@@ -160,7 +160,7 @@ def train_enhanced_model(_engineer, df):
     return best_model, best_type, comparison, feature_names
 
 
-#@st.cache_resource
+@st.cache_resource
 def create_sustainability_calc(df):
     """Create sustainability calculator"""
     calculator = create_sustainability_target(
