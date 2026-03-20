@@ -38,7 +38,7 @@ from core import (
 
 # Page configuration
 st.set_page_config(
-    page_title="Enhanced Carbon Forecasting",
+    page_title="Carbon Forecasting",
     page_icon="🌍",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -333,7 +333,7 @@ def main():
     # Header
     st.markdown("""
         <h1>
-            🌍 <span class="gradient-text">Enhanced Carbon Emission Forecasting System</span>
+            🌍 <span class="gradient-text">Carbon Emission Forecasting System</span>
         </h1>
     """, unsafe_allow_html=True)
     st.markdown("""
