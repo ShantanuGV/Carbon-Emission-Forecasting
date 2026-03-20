@@ -331,28 +331,28 @@ def create_feature_importance_chart(model):
 
 def main():
     # Header
-    st.markdown(\"\"\"
+    st.markdown("""
         <h1>
-            🌍 <span class=\"gradient-text\">Enhanced Carbon Emission Forecasting System</span>
+            🌍 <span class="gradient-text">Enhanced Carbon Emission Forecasting System</span>
         </h1>
-    \"\"\", unsafe_allow_html=True)
-    st.markdown(\"\"\"
+    """, unsafe_allow_html=True)
+    st.markdown("""
         **Multi-Factor ML-Driven Platform with Sustainability Targets**
         
         This advanced system integrates **policy factors** and **structural dynamics** to forecast 
         emissions and simulate realistic decarbonization pathways toward **sustainable targets**.
-    \"\"\")
+    """)
     
     # Data path (Correct for root)
-    data_path = Path(__file__).parent / \"data\" / \"real_emission_dataset.csv\"
+    data_path = Path(__file__).parent / "data" / "real_emission_dataset.csv"
     
     try:
         # Load data
-        with st.spinner(\"Loading multi-factor emission data...\"):
+        with st.spinner("Loading multi-factor emission data..."):
             df, engineer = load_multifactor_data(str(data_path))
         
         # Train model
-        with st.spinner(\"Training advanced ML models (comparing algorithms)...\"):
+        with st.spinner("Training advanced ML models (comparing algorithms)..."):
             model, model_type, comparison, feature_names = train_enhanced_model(engineer, df)
         
         # Create sustainability calculator
@@ -360,10 +360,10 @@ def main():
         target_info = sustainability_calc.get_target_info()
         
         # Sidebar
-        st.sidebar.header(\"⚙️ Forecast Settings\")
+        st.sidebar.header("⚙️ Forecast Settings")
         
         years_ahead = st.sidebar.slider(
-            \"Forecast Horizon (years)\",
+            "Forecast Horizon (years)",
             min_value=10,
             max_value=30,
             value=26,  # To 2050
@@ -371,22 +371,22 @@ def main():
         )
         
         target_year = st.sidebar.selectbox(
-            \"Target Year for Analysis\",
+            "Target Year for Analysis",
             options=[2030, 2035, 2040, 2045, 2050],
             index=4
         )
         
         # Sustainability target settings
-        st.sidebar.markdown(\"---\")
-        st.sidebar.header(\"🎯 Sustainability Target\")
+        st.sidebar.markdown("---")
+        st.sidebar.header("🎯 Sustainability Target")
         
         reduction_target = st.sidebar.slider(
-            \"Reduction Target (%)\",
+            "Reduction Target (%)",
             min_value=30,
             max_value=80,
             value=50,
             step=5,
-            help=\"Percentage reduction from 2005 baseline\"
+            help="Percentage reduction from 2005 baseline"
         )
         
         # Update sustainability target if changed
@@ -401,28 +401,28 @@ def main():
             target_info = sustainability_calc.get_target_info()
         
         # Sustainability Banner (Redesigned)
-        st.markdown(f\"\"\"
-            <div class=\"sustainability-banner\">
-                <div style=\"display: flex; justify-content: space-between; align-items: center;\">
+        st.markdown(f"""
+            <div class="sustainability-banner">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
-                        <span style=\"font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; color: #8b92a8;\">Net Zero Target Analysis</span>
-                        <div class=\"target-highlight\">🎯 {target_info['target_emission']:.0f} MT by {target_year}</div>
-                        <div style=\"color: #51cf66; font-weight: 600;\">{target_info['reduction_from_baseline']:.0f}% reduction from 2005 baseline</div>
+                        <span style="font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; color: #8b92a8;">Net Zero Target Analysis</span>
+                        <div class="target-highlight">🎯 {target_info['target_emission']:.0f} MT by {target_year}</div>
+                        <div style="color: #51cf66; font-weight: 600;">{target_info['reduction_from_baseline']:.0f}% reduction from 2005 baseline</div>
                     </div>
-                    <div style=\"text-align: right;\">
-                        <div class=\"residual-tag\">
+                    <div style="text-align: right;">
+                        <div class="residual-tag">
                             🛡️ Residual Floor: {sustainability_calc.RESIDUAL_EMISSION_FLOOR_PERCENT}%
                         </div>
-                        <div style=\"font-size: 0.8em; color: #8b92a8; margin-top: 5px; max-width: 250px;\">
+                        <div style="font-size: 0.8em; color: #8b92a8; margin-top: 5px; max-width: 250px;">
                             Hard-to-abate sectors: Agriculture, Aviation, Heavy Industry
                         </div>
                     </div>
                 </div>
             </div>
-        \"\"\", unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
         
         # KPIs
-        st.header(\"📊 Key Performance Indicators\")
+        st.header("📊 Key Performance Indicators")
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -431,10 +431,10 @@ def main():
         
         with col1:
             st.metric(
-                \"Current Emission\",
-                f\"{current_emission:.0f} MT\",
-                delta=f\"Year: {current_year}\",
-                delta_color=\"off\"
+                "Current Emission",
+                f"{current_emission:.0f} MT",
+                delta=f"Year: {current_year}",
+                delta_color="off"
             )
         
         # Create simulator
@@ -448,34 +448,34 @@ def main():
         
         with col2:
             st.metric(
-                f\"{target_year} Forecast\",
-                f\"{baseline_target_val:.0f} MT\",
-                delta=f\"+{baseline_target_val - current_emission:.0f} MT\",
-                delta_color=\"inverse\"
+                f"{target_year} Forecast",
+                f"{baseline_target_val:.0f} MT",
+                delta=f"+{baseline_target_val - current_emission:.0f} MT",
+                delta_color="inverse"
             )
         
         with col3:
             gap = baseline_target_val - target_info['target_emission']
             st.metric(
-                \"Emission Gap\",
-                f\"{gap:.0f} MT\",
-                delta=f\"{(gap/target_info['target_emission']*100):.0f}% over target\",
-                delta_color=\"inverse\"
+                "Emission Gap",
+                f"{gap:.0f} MT",
+                delta=f"{(gap/target_info['target_emission']*100):.0f}% over target",
+                delta_color="inverse"
             )
         
         with col4:
             st.metric(
-                \"Forecasting Engine\",
+                "Forecasting Engine",
                 model_type.replace('_', ' ').title(),
-                delta=f\"Accuracy: {model.metrics['r2_score']:.3f}\",
-                delta_color=\"normal\"
+                delta=f"Accuracy: {model.metrics['r2_score']:.3f}",
+                delta_color="normal"
             )
         
         st.divider()
         
         # Structural Baseline Factors
-        st.header(\"🏗️ Structural Baseline Factors\")
-        st.markdown(\"*These slow-changing factors influence emissions alongside policies*\")
+        st.header("🏗️ Structural Baseline Factors")
+        st.markdown("*These slow-changing factors influence emissions alongside policies*")
         
         baseline_factors = engineer.get_structural_baseline(df)
         
@@ -493,116 +493,116 @@ def main():
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         👥 <strong>Population</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['population_million']:.0f}M</div>
-                    <div style=\"color: #4da6ff; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['population_million']:.0f}M</div>
+                    <div style="color: #4da6ff; font-size: 0.9em;">
                         Trending ~{pop_growth:+.2f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
             
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #ffd43b;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #ffd43b;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         🏙️ <strong>Urbanization</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['urbanization_rate']:.1f}%</div>
-                    <div style=\"color: #ffd43b; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['urbanization_rate']:.1f}%</div>
+                    <div style="color: #ffd43b; font-size: 0.9em;">
                         Increasing ~{urb_growth:+.1f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         with col2:
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #51cf66;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #51cf66;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         🌳 <strong>Forest Cover</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['forest_cover_percent']:.1f}%</div>
-                    <div style=\"color: #51cf66; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['forest_cover_percent']:.1f}%</div>
+                    <div style="color: #51cf66; font-size: 0.9em;">
                         {'Increasing' if forest_growth > 0 else 'Decreasing'} ~{abs(forest_growth):.2f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
             
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #ff6b6b;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #ff6b6b;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         ⚡ <strong>Energy Demand</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['energy_demand_index']:.0f}pt</div>
-                    <div style=\"color: #ff6b6b; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['energy_demand_index']:.0f}pt</div>
+                    <div style="color: #ff6b6b; font-size: 0.9em;">
                         Growing ~{energy_growth:+.2f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         with col3:
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #ff922b;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #ff922b;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         🚛 <strong>Transport</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['transport_index']:.0f}pt</div>
-                    <div style=\"color: #ff922b; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['transport_index']:.0f}pt</div>
+                    <div style="color: #ff922b; font-size: 0.9em;">
                         Trending ~{trans_growth:+.2f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
             
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #cc5de8;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #cc5de8;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         🏭 <strong>Industrial</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['industrial_production_index']:.0f}pt</div>
-                    <div style=\"color: #cc5de8; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['industrial_production_index']:.0f}pt</div>
+                    <div style="color: #cc5de8; font-size: 0.9em;">
                         Growing ~{ind_growth_val:+.2f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         with col4:
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #20c997;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #20c997;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         🌱 <strong>Renewable</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['renewable_percent']:.1f}%</div>
-                    <div style=\"color: #20c997; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['renewable_percent']:.1f}%</div>
+                    <div style="color: #20c997; font-size: 0.9em;">
                         Trending {renewable_trend:+.1f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
             
-            st.markdown(f\"\"\"
-                <div class=\"factor-card\" style=\"border-top-color: #adb5bd;\">
-                    <div style=\"font-size: 1.2em; display: flex; align-items: center; gap: 8px;\">
+            st.markdown(f"""
+                <div class="factor-card" style="border-top-color: #adb5bd;">
+                    <div style="font-size: 1.2em; display: flex; align-items: center; gap: 8px;">
                         ⛽ <strong>Fossil Fuels</strong>
                     </div>
-                    <div style=\"font-size: 1.5em; font-weight: 700; margin: 10px 0;\">{baseline_factors['fossil_percent']:.1f}%</div>
-                    <div style=\"color: #adb5bd; font-size: 0.9em;\">
+                    <div style="font-size: 1.5em; font-weight: 700; margin: 10px 0;">{baseline_factors['fossil_percent']:.1f}%</div>
+                    <div style="color: #adb5bd; font-size: 0.9em;">
                         Trending {fossil_trend:+.1f}% annually
                     </div>
                 </div>
-            \"\"\", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         st.divider()
         
         # Forecast Chart
-        st.header(\"📈 Multi-Factor Emission Forecast\")
+        st.header("📈 Multi-Factor Emission Forecast")
         forecast_chart = create_enhanced_forecast_chart(df, baseline_df, sustainability_calc)
         st.plotly_chart(forecast_chart, width='stretch')
         
         st.divider()
         
         # Scenario Comparison
-        st.header(\"🎯 Enhanced Policy Scenario Comparison\")
+        st.header("🎯 Enhanced Policy Scenario Comparison")
         comparison_df = simulator.compare_scenarios(years_ahead)
         scenario_chart = create_scenario_comparison_chart(comparison_df, target_info['target_emission'])
         st.plotly_chart(scenario_chart, width='stretch')
@@ -626,9 +626,9 @@ def main():
             meets_target = gap <= 0
             
             with col:
-                st.markdown(f\"\"\"
-                    <div class=\"factor-card\">
-                        <h3 style=\"color: {color};\">{name}</h3>
+                st.markdown(f"""
+                    <div class="factor-card">
+                        <h3 style="color: {color};">{name}</h3>
                         <p><strong>🌱 Renewable Growth:</strong> {params.renewable_growth_percent:+.0f}%</p>
                         <p><strong>⛽ Fossil Reduction:</strong> {params.fossil_reduction_percent:+.0f}%</p>
                         <p><strong>🏭 Industrial Growth:</strong> {params.industrial_growth_percent:+.0f}%</p>
@@ -639,27 +639,27 @@ def main():
                         <p><strong>vs Target:</strong> {gap:+.0f} MT</p>
                         <p><strong>Status:</strong> {'✅ Meets Target' if meets_target else '❌ Exceeds Target'}</p>
                     </div>
-                \"\"\", unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
         
         st.divider()
         
         # Custom Simulator
-        st.header(\"🎛️ Custom Multi-Factor Scenario Simulator\")
+        st.header("🎛️ Custom Multi-Factor Scenario Simulator")
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader(\"Policy Factors (Controllable)\")
-            renewable_growth = st.slider(\"🌱 Renewable Energy Growth (%)\", -20.0, 150.0, 60.0, 5.0)
-            fossil_reduction = st.slider(\"⛽ Fossil Fuel Reduction (%)\", -30.0, 80.0, 50.0, 5.0)
-            industrial_growth = st.slider(\"🏭 Industrial Emission Growth (%)\", -30.0, 50.0, 0.0, 5.0)
-            forest_protection = st.slider(\"🌳 Forest Protection/Expansion (%)\", -20.0, 30.0, 10.0, 5.0)
+            st.subheader("Policy Factors (Controllable)")
+            renewable_growth = st.slider("🌱 Renewable Energy Growth (%)", -20.0, 150.0, 60.0, 5.0)
+            fossil_reduction = st.slider("⛽ Fossil Fuel Reduction (%)", -30.0, 80.0, 50.0, 5.0)
+            industrial_growth = st.slider("🏭 Industrial Emission Growth (%)", -30.0, 50.0, 0.0, 5.0)
+            forest_protection = st.slider("🌳 Forest Protection/Expansion (%)", -20.0, 30.0, 10.0, 5.0)
         
         with col2:
-            st.subheader(\"Structural Adjustments\")
-            energy_efficiency = st.slider(\"⚡ Energy Efficiency Improvement (%)\", -10.0, 50.0, 25.0, 5.0)
-            pop_adjustment = st.slider(\"👥 Population Growth Adjustment (%)\", -0.5, 0.5, 0.0, 0.1)
-            urban_adjustment = st.slider(\"🏙️ Urbanization Rate Adjustment (%)\", -0.5, 0.5, 0.0, 0.1)
-            policy_start = st.slider(\"📅 Policy Start Year\", int(df['Year'].max()) + 1, int(df['Year'].max()) + 5, int(df['Year'].max()) + 1)
+            st.subheader("Structural Adjustments")
+            energy_efficiency = st.slider("⚡ Energy Efficiency Improvement (%)", -10.0, 50.0, 25.0, 5.0)
+            pop_adjustment = st.slider("👥 Population Growth Adjustment (%)", -0.5, 0.5, 0.0, 0.1)
+            urban_adjustment = st.slider("🏙️ Urbanization Rate Adjustment (%)", -0.5, 0.5, 0.0, 0.1)
+            policy_start = st.slider("📅 Policy Start Year", int(df['Year'].max()) + 1, int(df['Year'].max()) + 5, int(df['Year'].max()) + 1)
         
         custom_params = EnhancedPolicyParameters(
             renewable_growth_percent=renewable_growth,
@@ -695,28 +695,28 @@ def main():
         improvement = baseline_gap - custom_gap
         
         col1, col2, col3, col4 = st.columns(4)
-        with col1: st.metric(f\"Current Trend {target_year}\", f\"{baseline_target_val:.0f} MT\", delta=f\"+{baseline_gap:.0f} MT over target\", delta_color=\"inverse\")
-        with col2: st.metric(f\"Custom {target_year}\", f\"{custom_emission:.0f} MT\", delta=f\"{custom_gap:+.0f} MT vs target\", delta_color=\"inverse\")
-        with col3: st.metric(\"Improvement\", f\"{improvement:.0f} MT\", delta=f\"{(improvement/baseline_target_val*100):.1f}% reduction\", delta_color=\"normal\")
+        with col1: st.metric(f"Current Trend {target_year}", f"{baseline_target_val:.0f} MT", delta=f"+{baseline_gap:.0f} MT over target", delta_color="inverse")
+        with col2: st.metric(f"Custom {target_year}", f"{custom_emission:.0f} MT", delta=f"{custom_gap:+.0f} MT vs target", delta_color="inverse")
+        with col3: st.metric("Improvement", f"{improvement:.0f} MT", delta=f"{(improvement/baseline_target_val*100):.1f}% reduction", delta_color="normal")
         with col4: 
             meets = custom_gap <= 0
-            st.metric(\"Target Status\", \"✅ Achieved\" if meets else \"❌ Not Met\", delta=f\"{abs(custom_gap):.0f} MT {'below' if meets else 'above'}\", delta_color=\"normal\" if meets else \"inverse\")
+            st.metric("Target Status", "✅ Achieved" if meets else "❌ Not Met", delta=f"{abs(custom_gap):.0f} MT {'below' if meets else 'above'}", delta_color="normal" if meets else "inverse")
         
         st.divider()
         
         # Importance
-        st.header(\"🔍 Factor Importance Analysis\")
+        st.header("🔍 Factor Importance Analysis")
         importance_chart = create_feature_importance_chart(model)
         if importance_chart: st.plotly_chart(importance_chart, width='stretch')
         
-        with st.expander(\"🤖 ML Comparison\"): st.dataframe(comparison, width='stretch')
-        with st.expander(\"📋 Forecast Data\"): st.dataframe(custom_scenario, width='stretch')
+        with st.expander("🤖 ML Comparison"): st.dataframe(comparison, width='stretch')
+        with st.expander("📋 Forecast Data"): st.dataframe(custom_scenario, width='stretch')
         
     except FileNotFoundError:
-        st.error(f\"❌ Data file not found at {data_path}!\")
+        st.error(f"❌ Data file not found at {data_path}!")
     except Exception as e:
-        st.error(f\"❌ Error: {str(e)}\")
+        st.error(f"❌ Error: {str(e)}")
         st.exception(e)
 
-if __name__ == \"__main__\":
+if __name__ == "__main__":
     main()
