@@ -14,7 +14,6 @@ import importlib
 
 # Add project root to path for core module imports
 sys.path.append(str(Path(__file__).parent))
-<<<<<<< HEAD
 
 import core
 importlib.reload(core)
@@ -25,8 +24,6 @@ import core.feature_engineering
 importlib.reload(core.scenario_engine)
 importlib.reload(core.model_training)
 importlib.reload(core.feature_engineering)
-=======
->>>>>>> 218745c (Deployment fix: added Procfile and fixed root paths)
 
 from core import (
     FeatureEngineer,
@@ -152,8 +149,8 @@ def train_enhanced_model(_engineer, df):
     X, feature_names = _engineer.prepare_features(df, include_interactions=True)
     y = df['Emission']
     
-    # Auto-select best model logic
-    best_type, _, comparison = auto_select_best_model(X, y)
+    # Auto-select best model logic is bypassed to force linear extrapolation
+    best_type, _, comparison = auto_select_best_model(X, y) # kept for the UI comparison table
     
     # Force linear model for proper future policy divergence (tree models extrapolate constant planes)
     from core.model_training import train_multifactor_model
@@ -346,13 +343,8 @@ def main():
         emissions and simulate realistic decarbonization pathways toward **sustainable targets**.
     \"\"\")
     
-<<<<<<< HEAD
-    # Data path (Relative to root)
+    # Data path (Correct for root)
     data_path = Path(__file__).parent / \"data\" / \"real_emission_dataset.csv\"
-=======
-    # Data path (corrected for root relocation)
-    data_path = Path(__file__).parent / "data" / "emission.csv"
->>>>>>> 218745c (Deployment fix: added Procfile and fixed root paths)
     
     try:
         # Load data
@@ -360,7 +352,7 @@ def main():
             df, engineer = load_multifactor_data(str(data_path))
         
         # Train model
-        with st.spinner(\"Training advanced ML models (comparing algorithms)...\"+model_type.replace('_', ' ').title()):
+        with st.spinner(\"Training advanced ML models (comparing algorithms)...\"):
             model, model_type, comparison, feature_names = train_enhanced_model(engineer, df)
         
         # Create sustainability calculator
