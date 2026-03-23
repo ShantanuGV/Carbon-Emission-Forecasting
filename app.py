@@ -337,13 +337,18 @@ def create_feature_importance_chart(model):
 
 
 def render_hero():
-    """Render cinematic hero landing section with centered architectural typography"""
-    # Background image path
-    
-    
-    # Pythonically inject image to base64 for background-image
     import base64
-    
+    from pathlib import Path
+
+    bg_path = Path(__file__).parent / "bg.jpg"
+
+    if bg_path.exists():
+        with open(bg_path, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read()).decode()
+    else:
+        encoded_string = ""  # fallback
+
+    st.session_state.encoded_hero_bg = encoded_string
 
     # Store encoded string in session state to use in global CSS outside this function
     st.session_state.encoded_hero_bg = encoded_string
