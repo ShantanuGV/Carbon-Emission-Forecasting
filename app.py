@@ -658,8 +658,8 @@ def main():
         }}
 
         /* Alternating subtle section background tints */
-        .page-section:nth-child(odd)  {{ background-color: #FAFAF7; }}
-        .page-section:nth-child(even) {{ background-color: #F2F5F0; }}
+        .page-section:nth-child(odd)  {{ background-color: #fff7f2; }}
+        .page-section:nth-child(even) {{ background-color: #fff1eb; }}
 
         /* Snap-scroll on the main content wrapper */
         [data-testid="stAppViewContainer"] > section {{
