@@ -1028,6 +1028,12 @@ def main():
                 key='target_slider',
                 help="Adjust the desired percentage reduction from the 2005 baseline."
             )
+
+        target_year = st.selectbox(
+            "Target Year for Analysis",
+            options=[2030, 2035, 2040, 2045, 2050],
+            index=4
+        )
         
         st.divider()
         st.markdown('</div>', unsafe_allow_html=True)  # close #forecast section
