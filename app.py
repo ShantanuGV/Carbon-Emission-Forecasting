@@ -669,6 +669,43 @@ def main():
 
         /* Active nav link highlight */
         .nav-link.active {{ color: #DDA340 !important; }}
+
+
+
+        /* SELECTBOX BACKGROUND */
+        div[data-baseweb="select"] > div {{
+            background-color: #064e3b !important;  /* dark green */
+            color: white !important;
+            border-radius: 8px;
+        }}
+
+        /* SELECTBOX TEXT */
+        div[data-baseweb="select"] span {{
+            color: white !important;
+        }}
+
+        /* DROPDOWN MENU */
+        ul[role="listbox"] {{
+            background-color: #064e3b !important;
+            color: white !important;
+        }}
+
+        /* DROPDOWN OPTIONS */
+        li[role="option"] {{
+            background-color: #064e3b !important;
+            color: white !important;
+        }}
+
+        /* HOVER EFFECT */
+        li[role="option"]:hover {{
+            background-color: #065f46 !important;
+        }}
+
+        div[data-baseweb="select"] > div {{
+            background: linear-gradient(135deg, #064e3b, #065f46);
+            border: 1px solid #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+        }}
         </style>
     """, unsafe_allow_html=True)
 
