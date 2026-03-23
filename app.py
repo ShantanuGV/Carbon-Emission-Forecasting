@@ -45,7 +45,7 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap');
 
     /* BASE */
-    .stApp { background-color: #FAFAF7 !important; font-family: 'Inter', sans-serif; }
+    .stApp { background-color: #fff7f2 !important; font-family: 'Inter', sans-serif; }
     header, footer { visibility: hidden; }
     </style>
 """, unsafe_allow_html=True)
@@ -348,8 +348,6 @@ def render_hero():
     else:
         encoded_string = ""  # fallback
 
-    st.session_state.encoded_hero_bg = encoded_string
-
     # Store encoded string in session state to use in global CSS outside this function
     st.session_state.encoded_hero_bg = encoded_string
 
@@ -387,14 +385,14 @@ def main():
             padding-top: 0px !important;
             max-width: 100% !important;
             margin: 0 auto !important;
-            background-color: #FAFAF7 !important;
+            background-color: #fff7f2 !important;
             text-align: center !important;
         }}
 
         html, body, .stApp, .main, [data-testid="stAppViewContainer"] {{
             overflow: auto !important;
             height: auto !important;
-            background-color: #FAFAF7 !important;
+            background-color: #fff7f2 !important;
         }}
 
         /* ── 2. HERO SECTION ───────────────────────────────── */
